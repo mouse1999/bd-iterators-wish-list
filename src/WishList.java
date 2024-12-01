@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ListIterator;
 
 public class WishList {
 
@@ -9,6 +10,14 @@ public class WishList {
      * @return the wishList with the newly added item
      */
     public List<WishListItem> addLast(List<WishListItem> wishList, WishListItem item) {
+
+        ListIterator<WishListItem> wishListIterator = wishList.listIterator();
+        while (wishListIterator.hasNext()) {
+
+            wishListIterator.next();
+        }
+
+        wishListIterator.add(item);
         return wishList;
     }
 
@@ -20,6 +29,22 @@ public class WishList {
      * @return the wishList with the newly added item
      */
     public List<WishListItem> addAtIndex(List<WishListItem> wishList, WishListItem item, int index) {
+
+        ListIterator<WishListItem> wishListIterator = wishList.listIterator();
+        int counter = 0;
+        while (wishListIterator.hasNext()) {
+            wishListIterator.next();
+            if(counter == index - 1) {
+                wishListIterator.add(item);
+
+            }
+
+            counter++;
+        }
+        if (index > counter) {
+            wishListIterator.add(item);
+        }
+
         return wishList;
     }
 
@@ -29,6 +54,12 @@ public class WishList {
      * @return the empty wishList
      */
     public List<WishListItem> removeAll(List<WishListItem> wishList) {
+        ListIterator<WishListItem> wishListIterator = wishList.listIterator();
+        while (wishListIterator.hasNext()) {
+
+            wishListIterator.next();
+            wishListIterator.remove();
+        }
         return wishList;
     }
 
@@ -39,6 +70,7 @@ public class WishList {
      * @return the wishList with the removed item
      */
     public List<WishListItem> removeItem(List<WishListItem> wishList, WishListItem item) {
+        wishList.remove(item);
         return wishList;
     }
 }
